@@ -1,0 +1,17 @@
+@import './styles/_variables.scss';
+
+.App {
+  &.light {       
+    --background-color: #{map-get($light-theme, 'background-color')};
+    --text-color: #{map-get($light-theme, 'text-color')};
+  }
+  &.dark {
+    --background-color: #{map-get($dark-theme, 'background-color')};
+    --text-color: #{map-get($dark-theme, 'text-color')};
+  }
+  
+  background-color: var(--background-color);
+  color: var(--text-color);
+  min-height: 100vh;       
+}
+

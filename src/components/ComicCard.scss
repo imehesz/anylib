@@ -1,0 +1,18 @@
+// src/components/ComicCard.scss
+.comic-card {
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid #666;
+  border-radius: 10px;
+
+  img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  h3 {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+  }
+}
+
