@@ -8,19 +8,25 @@ function App() {
   const [comics, setComics] = useState([]);
   const [filteredComics, setFilteredComics] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('dark');
   const [itemsToShow, setItemsToShow] = useState(20);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  // Fetch data on mount
+  // Fetch data only on initial mount
   useEffect(() => {
     const getData = async () => {
       try {
-        const comicsData = await fetchSheetData(); // Data is already in the correct format
-        setComics(comicsData);
-        setFilteredComics(comicsData.slice(0, itemsToShow));
-        setError(false); // Reset error state in case of previous errors
+        // Fetch data only if comics array is empty
+        if (comics.length === 0) {
+          const comicsData = await fetchSheetData();
+          setComics(comicsData);
+          setFilteredComics(comicsData.slice(0, itemsToShow));
+          setError(false);
+        } else {
+          // Update filtered comics based on itemsToShow
+          setFilteredComics(comics.slice(0, itemsToShow));
+        }
       } catch (err) {
         console.error('Error in getData:', err);
         setError(true);
@@ -30,7 +36,7 @@ function App() {
     };
 
     getData();
-  }, [itemsToShow]);
+  }, [itemsToShow]); 
 
   // Handle search
   useEffect(() => {
